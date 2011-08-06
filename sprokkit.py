@@ -52,7 +52,6 @@ while 1:
             #Following Declarations of Privilidged Symbols, we run a names check.
             woot.send ( 'NAMES ' + channel + ' \r\n' )
             nameslist = data
-            woot.send ( '
             #If the nameslist variable contains the user with some sort of privilage. The check ends and returns to the command.
             if nameslist.find(atsymbol+mySubString) != -1:           
                 woot.send ( 'PRIVMSG '+channel+' :You are an op \r\n' )
@@ -116,7 +115,6 @@ while 1:
     if data.find ( 'MODE' ) != -1:
         woot.send ( 'PRIVMSG '+channel+' :MODE Command Was Sent. \r\n' )
         woot.send ( 'NAMES ' + channel + ' \r\n' )
-
     if data.find ( 'test' ) != -1:
         if (filterResponse() == 0):
             woot.send( 'PRIVMSG '+messageable+' :Test command ' ) 
