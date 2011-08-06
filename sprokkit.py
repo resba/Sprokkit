@@ -79,7 +79,38 @@ while 1:
             global readUserName
             readUserName = sentmessage[sentmessage.find(":")+1:sentmessage.find("!")]
             messageable = readUserName
-            return 0        
+            return 0
+# Feelin' up the channel.
+    if data.find ( '376' ) != -1:
+        woot.send( 'JOIN '+channel+'\r\n' )
+    if data.find ( '353' ) != -1:
+        nameslist = data
+        woot.send( 'PRIVMSG '+channel+' :Found new NAMES Listing: %s\r\n' %nameslist )
+    if data.find ( 'PING' ) != -1:
+        woot.send( 'PONG ' + data.split() [1] + '\r\n')        	
+    if data.find ( 'MODE' ) != -1:
+        woot.send ( 'PRIVMSG '+channel+' :MODE Command Was Sent. \r\n' )
+        woot.send ( 'NAMES ' + channel + ' \r\n' )
+
+    if data.find ( 'test' ) != -1:
+        if (filterResponse() == 0):
+            woot.send( 'PRIVMSG '+messageable+' :Test command ' ) 
+
+# Debug commands to help with Sprokkit Development.
+    if data.find ( '!debug:say' ) != -1:
+        lastMessage = data
+        parsedMessage = lastMessage[lastMessage.find("!debug:say")+1:lastMessage.find("~.")]
+        woot.send ( 'PRIVMSG '+channel+' :%s\r\n' % parsedMessage )
+    if data.find ( '!debug:reloader' ) != -1:
+        woot.send ( 'NAMES '+channel+' \r\n' )
+    if data.find ( 'MODE' ) != -1:
+        woot.send ( 'PRIVMSG '+channel+' :MODE Command Was Sent. \r\n' )
+        woot.send ( 'NAMES '+channel+' \r\n' )
+    if data.find ( '!debug:lastUsed') != -1:
+        woot.send ("PRIVMSG "+channel+" :%s\r\n" % lastUsed )
+    if data.find ( '!debug:time.time' ) != -1:
+        woot.send ("PRIVMSG "+channel+" :%s\r\n" % time.time() )
+
 """
 # Command Cooldown function. Basically checks to see if its been about 5 seconds
 # before someone is allowed to use another one of Wikkity's commands.
@@ -104,32 +135,3 @@ while 1:
         elif data.find( '!' ) != -1:
             return 0
 """
-# Feelin' up the channel.
-    if data.find ( '376' ) != -1:
-        woot.send( 'JOIN '+channel+'\r\n' )
-    if data.find ( '353' ) != -1:
-        nameslist = data
-        woot.send( 'PRIVMSG '+channel+' :Found new NAMES Listing: %s\r\n' %nameslist )
-    if data.find ( 'PING' ) != -1:
-        woot.send( 'PONG ' + data.split() [1] + '\r\n')        	
-    if data.find ( 'MODE' ) != -1:
-        woot.send ( 'PRIVMSG '+channel+' :MODE Command Was Sent. \r\n' )
-        woot.send ( 'NAMES ' + channel + ' \r\n' )
-    if data.find ( 'test' ) != -1:
-        if (filterResponse() == 0):
-            woot.send( 'PRIVMSG '+messageable+' :Test command ' ) 
-
-# Debug commands to help with Sprokkit Development.
-    if data.find ( '!debug:say' ) != -1:
-        lastMessage = data
-        parsedMessage = lastMessage[lastMessage.find("!debug:say")+1:lastMessage.find("~.")]
-        woot.send ( 'PRIVMSG '+channel+' :%s\r\n' % parsedMessage )
-    if data.find ( '!debug:reloader' ) != -1:
-        woot.send ( 'NAMES '+channel+' \r\n' )
-    if data.find ( 'MODE' ) != -1:
-        woot.send ( 'PRIVMSG '+channel+' :MODE Command Was Sent. \r\n' )
-        woot.send ( 'NAMES '+channel+' \r\n' )
-    if data.find ( '!debug:lastUsed') != -1:
-        woot.send ("PRIVMSG "+channel+" :%s\r\n" % lastUsed )
-    if data.find ( '!debug:time.time' ) != -1:
-        woot.send ("PRIVMSG "+channel+" :%s\r\n" % time.time() )
