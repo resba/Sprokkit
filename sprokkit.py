@@ -42,7 +42,7 @@ while 1:
         sentmessage = data
         woot.send ( 'PRIVMSG '+channel+' :Loaded filterResponse Function with '+sentmessage+' as the trigger. \r\n' )
         #The command has been called. First check to see what type of command was called.
-        if data.find ( '!' ) != -1:
+        if data.find ( ':!' ) != -1:
             global messageable 
             messageable = channel
             woot.send ( 'PRIVMSG '+channel+' :The command was an announement ! \r\n' )
@@ -73,7 +73,7 @@ while 1:
                 else:
                     woot.send ( 'PRIVMSG '+channel+' :Command Cooldown Active. Ignoring Command \r\n' )
                     return 1
-        elif data.find ( '^' ) != -1:
+        elif data.find ( ':^' ) != -1:
             #The Command was a Privmsg, so we send the privmsg.
             global readUserName
             readUserName = sentmessage[sentmessage.find(":")+1:sentmessage.find("!")]
