@@ -91,7 +91,7 @@ while 1:
 
     if data.find ( 'test' ) != -1:
         if (filterResponse() == 0):
-            woot.send( 'PRIVMSG '+messageable+' :Test command ' ) 
+            woot.send( 'PRIVMSG '+messageable+' :Test command \r\n' ) 
 
 # Debug commands to help with Sprokkit Development.
     if data.find ( '!debug:say' ) != -1:
