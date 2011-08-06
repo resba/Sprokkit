@@ -39,8 +39,8 @@ while 1:
     globalnullvalue = ""
 
     def filterResponse():
-	    sentmessage = data
-        woot.send ( 'PRIVMSG '+channel+' :Loaded filterResponse Function with:'+sentmessage+' ...as the trigger. \r\n' )
+        sentmessage = data
+        woot.send ( 'PRIVMSG '+channel+' :Loaded filterResponse Function with '+sentmessage+' as the trigger. \r\n' )
         #The command has been called. First check to see what type of command was called.
         if data.find ( '!' ) != -1:
             woot.send ( 'PRIVMSG '+channel+' :The command was an announement ! \r\n' )
