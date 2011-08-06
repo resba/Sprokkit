@@ -51,9 +51,6 @@ while 1:
             woot.send ( 'PRIVMSG '+channel+' :Last Message: %s\r\n'%mySubString )
             atsymbol = "@"
             voicesymbol = "+"
-            #Following Declarations of Privilidged Symbols, we run a names check.
-            woot.send ( 'NAMES ' + channel + ' \r\n' )
-            nameslist = data
             #If the nameslist variable contains the user with some sort of privilage. The check ends and returns to the command.
             if nameslist.find(atsymbol+mySubString) != -1:           
                 woot.send ( 'PRIVMSG '+channel+' :You are an op \r\n' )
