@@ -43,6 +43,7 @@ while 1:
         woot.send ( 'PRIVMSG '+channel+' :Loaded filterResponse Function with '+sentmessage+' as the trigger. \r\n' )
         #The command has been called. First check to see what type of command was called.
         if data.find ( '!' ) != -1:
+            messageable = channel
             woot.send ( 'PRIVMSG '+channel+' :The command was an announement ! \r\n' )
             #The command was an announcement. now we check for privilages.
             mySubString = sentmessage[sentmessage.find(":")+1:sentmessage.find("!")]
@@ -56,11 +57,9 @@ while 1:
             if nameslist.find(atsymbol+mySubString) != -1:           
                 woot.send ( 'PRIVMSG '+channel+' :You are an op \r\n' )
                 #because this is a global filter, the messageable is named the channel because its an announcement.
-                messageable = channel
                 return 0
             elif nameslist.find(voicesymbol+mySubString) != -1:
             	woot.send ( 'PRIVMSG '+channel+' :You are voiced \r\n' )
-            	messageable = channel
                 return 0
             else:
                 #If the user is NOT privilidged, then they need to jump through a few more hoops.
@@ -69,7 +68,6 @@ while 1:
                     global lastUsed
                     lastUsed = time.time()
                     woot.send ('PRIVMSG '+channel+' :lastUsed Check Passed, now returning to command \r\n' )
-                    messageable = channel
                     return 0
                 else:
                     woot.send ( 'PRIVMSG '+channel+' :Command Cooldown Active. Ignoring Command \r\n' )
