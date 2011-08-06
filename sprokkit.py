@@ -10,7 +10,7 @@
 # NOTE: All commented lines of CODE are debug messages for when something goes wrong.
 
 # Step 1: Import all the necessary libraries.
-import socket, sys, string, time, feedparser
+import socket, sys, string, time
 
 # Step 2: Enter your information for the bot. Incl Port of IRC Server, Nick that
 # the Bot will take, host (IRC server), RealName, Channel that you want the bot
