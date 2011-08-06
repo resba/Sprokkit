@@ -103,7 +103,7 @@ while 1:
             return 0
         elif data.find( '!' ) != -1:
             return 0
-""""
+"""
 # Feelin' up the channel.
     if data.find ( '376' ) != -1:
         woot.send( 'JOIN '+channel+'\r\n' )
@@ -133,4 +133,3 @@ while 1:
         woot.send ("PRIVMSG "+channel+" :%s\r\n" % lastUsed )
     if data.find ( '!debug:time.time' ) != -1:
         woot.send ("PRIVMSG "+channel+" :%s\r\n" % time.time() )
-"""
