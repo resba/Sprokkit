@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # Sprokkit IRC Bot. Built to test socket.socket() permissions.
 # Script by Resba
-# Version: 0.1
+# Version: 0.1-list
 # 
 # License: Do not remove this original copyright for fair use. 
 # Give credit where credit is due!
@@ -16,21 +16,23 @@ import socket, sys, string, time
 # the Bot will take, host (IRC server), RealName, Channel that you want the bot
 # to function in, and IDENT value.
 port = 6667
-nick = 'Sprokkit'
-host = 'canis.esper.net'
-name =  "Nothing Short of a Miracle"
-channel = '#bukkitwikibots'
-ident = 'ilikeoctogons'
+nick = 'SprokkitDuder'
+host = 'irc.esper.net'
+name =  "Nothing Short of a Miracle Times Four Hundred Or So."
+channel = '#sprokkit'
+ident = 'nopedotaviyougetnne'
 
 # Now we just initialize socket.socket and connect to the server, giving out
 # the bot's info to the server.
 woot = socket.socket()
 woot.connect ( (host, port) )
 woot.send ( 'NICK ' + nick + '\r\n' )
-woot.send ( 'USER ' + ident + ' ' +  ident + ' ' + ident + ' :Sprokkit\r\n' )
+woot.send ( 'USER ' + ident + ' ' +  ident + ' ' + ident + ' :SprokkitDev\r\n' )
 global nameslist
 global sentmessage
 global messageable
+global quoteables
+quoteables = ['OH MAN TESTING LIKE IT WAS NO-THING', '<articdragone> IT DOESNT SOUND SCIENTIFIC. i didnt say it didnt work']
 lastUsed = time.time()
 # Beginning the Loop here.
 while 1:
@@ -92,6 +94,25 @@ while 1:
     if data.find ( 'test' ) != -1:
         if (filterResponse() == 0):
             woot.send( 'PRIVMSG '+messageable+' :Test command \r\n' ) 
+
+# !quote 'quote detail"
+#    if data.find ( '!quoteadd' ) != -1:
+#        quote = data
+#        if (filterResponse() == 0):
+#            value = sentmessage[sentmessage.find("!quote")+1:sentmessage.find("|")]
+#:resba!~resbah@c-67-165-31-94.hsd1.pa.comcast.net PRIVMSG #bukkitwiki :!quote 1.
+    if data.find ('quote') != -1:
+        g = data
+        d = g[-1]
+        f = int(d)
+        if (filterResponse() == 0):
+#            if (isinstance(d, int)== True):
+#                woot.send ('PRIVMSG '+messageable+' :Sorry, not a valid quote. \r\n')
+#            else:
+            woot.send ('PRIVMSG '+messageable+' :'+quoteables[int(f):int(f)+1]+' \r\n')
+            
+            
+            
 """
 # Debug commands to help with Sprokkit Development.
     if data.find ( '!debug:say' ) != -1:
