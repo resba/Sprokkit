@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # Sprokkit IRC Bot. Built to test socket.socket() permissions.
 # Script by Resba
+# Uses WebPY Library in some parts [http://www.webpy.org/]
 # Version: 0.1-webpy implementation
 # 
 # License: Do not remove this original copyright for fair use. 
@@ -10,7 +11,7 @@
 # NOTE: All commented lines of CODE are debug messages for when something goes wrong.
 
 # Step 1: Import all the necessary libraries.
-import socket, sys, string, time
+import socket, sys, string, time, web, model
 
 # Step 2: Enter your information for the bot. Incl Port of IRC Server, Nick that
 # the Bot will take, host (IRC server), RealName, Channel that you want the bot
