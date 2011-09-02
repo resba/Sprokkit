@@ -16,18 +16,18 @@ import socket, sys, string, time
 # the Bot will take, host (IRC server), RealName, Channel that you want the bot
 # to function in, and IDENT value.
 port = 6667
-nick = 'SprokkitDuder'
+nick = 'SprokkitDev'
 host = 'irc.esper.net'
-name =  "Nothing Short of a Miracle Times Four Hundred Or So."
+name =  "Change Me"
 channel = '#sprokkit'
-ident = 'nopedotaviyougetnne'
+ident = 'changeme'
 
 # Now we just initialize socket.socket and connect to the server, giving out
 # the bot's info to the server.
 woot = socket.socket()
 woot.connect ( (host, port) )
 woot.send ( 'NICK ' + nick + '\r\n' )
-woot.send ( 'USER ' + ident + ' ' +  ident + ' ' + ident + ' :SprokkitDev\r\n' )
+woot.send ( 'USER ' + ident + ' ' +  ident + ' ' + ident + ' :Sprokkit\r\n' )
 global nameslist
 global sentmessage
 global messageable
