@@ -101,12 +101,14 @@ while 1:
         woot.send( 'JOIN '+channel+'\r\n' )
     if data.find ( '353' ) != -1:
         nameslist = data
-#        woot.send( 'PRIVMSG '+channel+' :Found new NAMES Listing: %s\r\n' %nameslist )
+        if (debug == 1):
+            woot.send( 'PRIVMSG '+channel+' :Found new NAMES Listing: %s\r\n' %nameslist )
     if data.find ( 'PING' ) != -1:
-        woot.send( 'PONG ' + data.split() [1] + '\r\n')        	
-    if data.find ( 'MODE' ) != -1:
-#        woot.send ( 'PRIVMSG '+channel+' :MODE Command Was Sent. \r\n' )
-        woot.send ( 'NAMES ' + channel + ' \r\n' )
+        woot.send( 'PONG ' + data.split() [1] + '\r\n');
+    if (nickpasscheck == 1):
+        if data.find ( 'NickServ!' ) != -1:
+            woot.send ( 'PRIVMSG NickServ :IDENTIFY '+nick+' '+nickpass+'\r\n' )
+            nickpasscheck = 0
 
     if data.find ( 'test' ) != -1:
         if (filterResponse() == 0):
