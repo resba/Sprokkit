@@ -157,6 +157,3 @@ while 1:
     if data.find ( '!debug.time.time' ) != -1:
         if (debugGrace()==1):
             woot.send ('PRIVMSG '+messageable+' :%s\r\n' % time.time() )
-
-
-"""
