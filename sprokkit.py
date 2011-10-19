@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # Sprokkit IRC Bot. Built to test socket.socket() permissions.
 # Script by Resba
-# Version: 0.1
+# Version: 0.1 b10
 # 
 # License: Do not remove this original copyright for fair use. 
 # Give credit where credit is due!
