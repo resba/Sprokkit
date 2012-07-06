@@ -10,16 +10,21 @@
 # NOTE: All commented lines of CODE are debug messages for when something goes wrong.
 
 # Step 1: Import all the necessary libraries.
-import socket, sys, string, time
+import socket, sys, string, time, os
+from subprocess import call
+
+host = raw_input('Host: ')
+channel = raw_input('Channel: ')
+statsurl = raw_input('enter url for stats for this channel: ')
 
 # Step 2: Enter your information for the bot. Incl Port of IRC Server, Nick that
 # the Bot will take, host (IRC server), RealName, Channel that you want the bot
 # to function in, and IDENT value.
 port = 6667
-nick = "Sprokkit"
-host = 'irc.eu.esper.net'
+nick = "resbot"
+#host = 'irc.eu.esper.net'
 name =  "SprokkitBot"
-channel = '#sprokkit'
+#channel = '#bukkit+++'
 ident = 'Loveitwhenweletloose'
 #Nickpasscheck: 1 - The nick requires a pass. 0 - The nick does NOT require a pass.
 nickpasscheck = 1
@@ -110,9 +115,9 @@ while 1:
             woot.send ( 'PRIVMSG NickServ :IDENTIFY '+nick+' '+nickpass+'\r\n' )
             nickpasscheck = 0
 
-    if data.find ( 'test' ) != -1:
+    if data.find ( 'stats' ) != -1:
         if (filterResponse() == 0):
-            woot.send( 'PRIVMSG '+messageable+' :Test command \r\n' ) 
+            woot.send( 'PRIVMSG '+messageable+' :Stats for this channel are at '+statsurl+' || You can find all the channels stats I render at http://reddit.shisho.me/logs/ \r\n' ) 
     def debugGrace():
         global messageable
         if (messageable == ''):
@@ -121,7 +126,7 @@ while 1:
             woot.send('PRIVMSG '+messageable+' :debugGrace() has been loaded \r\n' )
         sentmessage = data
         mySubString = sentmessage[sentmessage.find(":")+1:sentmessage.find("!")]
-        if (mySubString == botadmin or mySubString == botadmin2):
+        if (mySubString == botadmin):
             if(debug == 1):
                 woot.send('PRIVMSG '+messageable+' :You are one of the predefined users who can use this command. debugGrace() returns 1 \r\n' )
             return 1
@@ -131,14 +136,19 @@ while 1:
             return 0
 # Command to gracefully close Wikkit and disconnect it from the
 # Server.
-    if data.find ( '!debug.timetogo') != -1:
+    if data.find ( '!render.stats' ) != -1:
+        if (debugGrace() == 1):
+            os.chdir("/var/www/logs")
+            call(["pisg"])
+            woot.send ('PRIVMSG '+messageable+' :All Done! Stats are freshly generated at http://reddit.shisho.me/logs \r\n')
+    if data.find ( '!ctrl.timetogo') != -1:
         thenull = ""
         if (debugGrace() == 1):
             woot.send ("QUIT :I have been Deadeded. %s\r\n" % thenull )
             woot.close()
             sys.exit()
 #Toggles Debug
-    if data.find ( '!debug.debug') != -1:
+    if data.find ( '!ctrl.debug') != -1:
         if (debugGrace()==1):
             if (debug == 0):
                 debug = 1
@@ -147,13 +157,13 @@ while 1:
                 debug = 0
                 woot.send ('PRIVMSG '+messageable+' :Debug is OFF \r\n')
 #Fun debug commands
-    if data.find ( '!debug.reloader' ) != -1:
+    if data.find ( '!ctrl.reloader' ) != -1:
         if (debugGrace()==1):
             woot.send ( 'NAMES '+messageable+' \r\n' )
             woot.send ( 'PRIVMSG '+messageable+' :Boom! \r\n')
-    if data.find ( '!debug.lastUsed') != -1:
+    if data.find ( '!ctrl.lastUsed') != -1:
         if (debugGrace()==1):
             woot.send ('PRIVMSG '+messageable+' :%s\r\n' % lastUsed )
-    if data.find ( '!debug.time.time' ) != -1:
+    if data.find ( '!ctrl.time.time' ) != -1:
         if (debugGrace()==1):
             woot.send ('PRIVMSG '+messageable+' :%s\r\n' % time.time() )
